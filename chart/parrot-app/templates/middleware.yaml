@@ -1,10 +1,1 @@
-{{- if and .Values.ingress.enabled (not .Values.ingress.host) .Values.ingress.path }}
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: {{ .Release.Name }}-stripprefix
-spec:
-  stripPrefix:
-    prefixes:
-      - {{ .Values.ingress.path }}
-{{- end }}
+{{- /* Strip-prefix middleware removed: app is now always served at the root of its host. */ -}}

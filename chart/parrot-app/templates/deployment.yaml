@@ -5,7 +5,9 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
+  {{- if not .Values.hpaBench.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       app: {{ .Release.Name }}
@@ -14,6 +16,8 @@ spec:
       labels:
         app: {{ .Release.Name }}
         parrot-app-version: {{ .Values.appVersion }}
+      annotations:
+        checksum/nginx-config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       {{- if .Values.serviceAccountName }}
       serviceAccountName: {{ .Values.serviceAccountName }}
@@ -24,7 +28,7 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Values.nginx.port }}
         resources:
           requests:
             memory: {{ .Values.resources.requests.memory }}
@@ -90,6 +94,14 @@ spec:
               containerName: parrot-app
               divisor: "1M"
               resource: limits.ephemeral-storage
+        - name: DEPLOYMENT_NAME
+          value: {{ .Release.Name }}
+        {{- if .Values.hpaBench.enabled }}
+        - name: HPA_BENCH
+          value: "true"
+        - name: MEMCACHE_HOST
+          value: "{{ .Release.Name }}-memcached:11211"
+        {{- end }}
         volumeMounts:
         - name: nginx-config
           mountPath: /etc/nginx/nginx.conf

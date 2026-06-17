@@ -8,7 +8,8 @@ spec:
   type: {{ .Values.service.type }}
   ports:
   - port: {{ .Values.service.port }}
-    targetPort: 80
+    targetPort: {{ .Values.nginx.port }}
     protocol: TCP
+  sessionAffinity: ClientIP
   selector:
     app: {{ .Release.Name }}
