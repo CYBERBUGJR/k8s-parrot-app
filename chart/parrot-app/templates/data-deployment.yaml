@@ -1,0 +1,33 @@
+{{- if .Values.data.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-data
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-data
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-data
+    spec:
+      containers:
+      - name: data
+        image: "{{ .Values.data.image.repository }}:{{ .Values.data.image.tag }}"
+        command: ["sh", "-c", "sleep infinity"]
+        resources:
+          requests:
+            memory: {{ .Values.data.resources.requests.memory }}
+            cpu: {{ .Values.data.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.data.resources.limits.memory }}
+            cpu: {{ .Values.data.resources.limits.cpu }}
+        volumeMounts:
+        - name: fer-data
+          mountPath: /data
+      volumes:
+      - name: fer-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-data-pvc
+{{- end }}

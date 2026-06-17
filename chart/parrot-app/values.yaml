@@ -1,0 +1,48 @@
+replicaCount: 3
+
+image:
+  repository: harbor.cms/rancher_images/parrot-app
+  tag: v2.0.0
+  pullPolicy: Always
+
+appVersion: v2.0.0
+
+# ServiceAccount assigned to the pod. Empty means the namespace default SA;
+# the app then hides the permissions section. RBAC for this SA is NOT part
+# of this chart: the test scenario provides it.
+serviceAccountName: ""
+automountServiceAccountToken: true
+
+resources:
+  requests:
+    memory: 50Mi
+    cpu: 100m
+  limits:
+    memory: 100Mi
+    cpu: 200m
+    ephemeral-storage: 1Gi
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  host: ""
+  path: /parrot
+
+data:
+  enabled: true
+  image:
+    repository: busybox
+    tag: latest
+  resources:
+    requests:
+      memory: 50Mi
+      cpu: 100m
+    limits:
+      memory: 50Mi
+      cpu: 100m
+  storage:
+    size: 10Gi
+    storageClassName: longhorn

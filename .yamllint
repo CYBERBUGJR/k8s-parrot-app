@@ -1,0 +1,13 @@
+---
+extends: default
+ignore: |
+  chart/*/templates/
+rules:
+  # Helm templates use {{ }} which yamllint cannot parse as valid YAML braces
+  braces: disable
+  # Helm templates frequently lack the leading ---
+  document-start: disable
+  # Allow long lines in templates (URLs, image refs, etc.)
+  line-length:
+    max: 160
+    level: warning

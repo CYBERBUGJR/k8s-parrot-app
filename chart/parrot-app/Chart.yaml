@@ -1,0 +1,6 @@
+apiVersion: v2
+name: parrot-app
+description: PHP/Nginx test application for CMS DAQ
+version: 0.4.0
+appVersion: "2.0.0"
+type: application

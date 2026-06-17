@@ -1,0 +1,21 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: {{ if .Values.ingress.host }}Host(`{{ .Values.ingress.host }}`){{ else }}PathPrefix(`{{ .Values.ingress.path }}`){{ end }}
+      {{- if and (not .Values.ingress.host) .Values.ingress.path }}
+      middlewares:
+        - name: {{ .Release.Name }}-stripprefix
+      {{- end }}
+      services:
+        - name: {{ .Release.Name }}
+          port: {{ .Values.service.port }}
+{{- end }}
