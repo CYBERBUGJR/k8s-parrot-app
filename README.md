@@ -26,7 +26,7 @@ No external dependencies.
 
 ```bash
 helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/charts/parrot-app \
-  --version 0.5.8 \
+  --version 0.5.9 \
   --namespace default \
   --set ingress.host=parrot.example.com
 ```
@@ -68,7 +68,7 @@ helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/charts/parrot-app \
 
 ```bash
 helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/charts/parrot-app \
-  --version 0.5.8 \
+  --version 0.5.9 \
   --namespace default \
   --set ingress.host=parrot.example.com
 ```

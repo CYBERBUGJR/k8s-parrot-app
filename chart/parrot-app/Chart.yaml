@@ -1,7 +1,7 @@
 apiVersion: v2
 name: parrot-app
 description: Lightweight PHP dashboard running inside your cluster — visualise pod resources, RBAC permissions, events and stress-test limits from the pod's own perspective.
-version: 0.5.8
-appVersion: "2.3.5"
+version: 0.5.9
+appVersion: "2.3.6"
 type: application
 icon: https://raw.githubusercontent.com/CYBERBUGJR/k8s-parrot-app/main/screenshots/parrot-icon.png
