@@ -1,18 +1,16 @@
 # Parrot App
 
-<img src="src/assets/parrot.gif" height="60" align="left" style="margin-right:16px">
+<p align="center">
+  <img src="src/assets/parrot.gif" height="80">
+</p>
 
-**El famoso loro loco, inspector de Kubernetes!**
+<p align="center"><strong>El famoso loro loco, inspector de Kubernetes!</strong></p>
 
-A lightweight PHP dashboard that runs **inside** your cluster and shows what your pod can actually see: resources, permissions, node info, live metrics, and events. Drop it in, assign a ServiceAccount, and instantly visualise the cluster from the pod's own perspective.
-
+<p align="center">
+A lightweight PHP dashboard that runs <strong>inside</strong> your cluster and shows what your pod can actually see: resources, permissions, node info, live metrics, and events. Drop it in, assign a ServiceAccount, and instantly visualise the cluster from the pod's own perspective.
+<br><br>
 Built as a hands-on teaching tool for Kubernetes concepts: RBAC, resource limits, HPA, OOMKiller, ephemeral storage eviction. No heavy frameworks. No external dependencies.
-
-<br clear="left">
-
----
-
-![Dashboard screenshot](screenshots/dashboard.png)
+</p>
 
 ---
 
@@ -28,6 +26,10 @@ Built as a hands-on teaching tool for Kubernetes concepts: RBAC, resource limits
 | **ServiceAccount Permissions** | Collapsible section: `SelfSubjectRulesReview` dump + `nodes:list` cluster-wide probe. Hidden when running as the `default` SA. |
 | **Pod Labels** | All labels injected via the Downward API |
 | **Pod Events** | Collapsible section showing the last 30 events for the current pod, auto-refreshed |
+
+---
+
+![Dashboard screenshot](screenshots/dashboard.png)
 
 ---
 
