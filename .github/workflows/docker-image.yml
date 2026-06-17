@@ -31,3 +31,19 @@ jobs:
           context: .
           push: ${{ github.event_name == 'push' }}
           tags: ghcr.io/cyberbugjr/k8s-parrot-app:latest
+
+      - name: Lint Helm chart
+        run: helm lint chart/parrot-app
+
+      - name: Package Helm chart
+        run: |
+          helm package chart/parrot-app
+          echo "CHART_PACKAGE=$(ls parrot-app-*.tgz)" >> "$GITHUB_ENV"
+
+      - name: Push Helm chart to GHCR
+        if: github.event_name == 'push'
+        run: |
+          helm registry login ghcr.io \
+            --username ${{ github.actor }} \
+            --password ${{ secrets.GITHUB_TOKEN }}
+          helm push "$CHART_PACKAGE" oci://ghcr.io/cyberbugjr/charts
