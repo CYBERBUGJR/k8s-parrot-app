@@ -1,15 +1,25 @@
 # Parrot App
 
 <p align="center">
-  <a href="https://matias.me/nsfw/"><img src="src/assets/parrot.gif" height="140"></a>
+  <a href="https://matias.me/nsfw/"><img src="src/assets/parrot.gif" height="180"></a>
 </p>
 
-<p align="center"><strong>El famoso loro loco, inspector de Kubernetes!</strong></p>
-
 <p align="center">
-A lightweight PHP dashboard that runs <strong>inside</strong> your cluster and shows what your pod can actually see: resources, permissions, node info, live metrics, and events. Drop it in, assign a ServiceAccount, and instantly visualise the cluster from the pod's own perspective.
-<br><br>
-Built as a hands-on teaching tool for Kubernetes concepts: RBAC, resource limits, HPA, OOMKiller, ephemeral storage eviction. No heavy frameworks. No external dependencies.
+  <a href="https://github.com/cyberbugjr/k8s-parrot-app/stargazers"><img src="https://img.shields.io/github/stars/cyberbugjr/k8s-parrot-app?style=flat" alt="Stars"></a>
+  <a href="https://github.com/cyberbugjr/k8s-parrot-app/releases/latest"><img src="https://img.shields.io/github/v/release/cyberbugjr/k8s-parrot-app?sort=semver" alt="Release"></a>
+  <a href="https://github.com/cyberbugjr/k8s-parrot-app/actions/workflows/app-release.yml"><img src="https://img.shields.io/github/actions/workflow/status/cyberbugjr/k8s-parrot-app/app-release.yml?label=app%20release" alt="App Release"></a>
+</p>
+
+<h3 align="center"><strong><em>El famoso loro loco, inspector de Kubernetes!</em></strong></h3>
+
+A lightweight PHP dashboard that runs **inside** your cluster and shows what your pod can actually see:
+resources, permissions, node info, live metrics, events.
+Drop it in, assign a ServiceAccount, and instantly visualise the cluster from the pod's own perspective.
+
+Built as a hands-on teaching tool for Kubernetes concepts: RBAC, resource limits, HPA, OOMKiller, ephemeral storage eviction. 
+No heavy frameworks. 
+No external dependencies.
+*2JZ no shit..*
 </p>
 
 **TL;DR** — install with Helm and set your hostname:
