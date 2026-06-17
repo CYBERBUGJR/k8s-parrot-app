@@ -1,7 +1,7 @@
 # Parrot App
 
 <p align="center">
-  <img src="src/assets/parrot.gif" height="80">
+  <a href="https://matias.me/nsfw/"><img src="src/assets/parrot.gif" height="140"></a>
 </p>
 
 <p align="center"><strong>El famoso loro loco, inspector de Kubernetes!</strong></p>
