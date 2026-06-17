@@ -1,0 +1,61 @@
+---
+# Scenario 3: SA with read access on pods (namespaced) and nodes (cluster).
+# Deploy with: helm upgrade --install parrot chart/parrot-app --set serviceAccountName=parrot-reader
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: parrot-reader
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: parrot-bare   # scenario 2: SA with no rights at all
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: parrot-reader
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "configmaps", "events"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: parrot-reader
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: parrot-reader
+subjects:
+  - kind: ServiceAccount
+    name: parrot-reader
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: parrot-reader-nodes
+rules:
+  - apiGroups: [""]
+    resources: ["nodes", "nodes/proxy"]
+    verbs: ["get", "list"]
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods", "nodes"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: parrot-reader-nodes
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: parrot-reader-nodes
+subjects:
+  - kind: ServiceAccount
+    name: parrot-reader
+    namespace: default

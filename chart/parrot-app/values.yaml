@@ -1,0 +1,49 @@
+replicaCount: 3
+
+image:
+  repository: harbor.cms/rancher_images/parrot-app
+  tag: v2.3.5
+  pullPolicy: Always
+
+appVersion: v2.3.5
+
+# ServiceAccount assigned to the pod. Empty means the namespace default SA;
+# the app then hides the permissions section. RBAC for this SA is NOT part
+# of this chart: the test scenario provides it.
+serviceAccountName: ""
+automountServiceAccountToken: true
+
+# HPA Scaling Tester — deploys an HPA + inline Memcached so all replicas share
+# stress state. The HPA targets this Deployment's CPU utilization.
+hpaBench:
+  enabled: false
+  hpa:
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 50
+
+memcached:
+  memoryLimitMB: 16
+
+resources:
+  requests:
+    memory: 50Mi
+    cpu: 100m
+  limits:
+    memory: 100Mi
+    cpu: 200m
+    ephemeral-storage: 1Gi
+
+nginx:
+  port: 8080
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  host: ""       # e.g. parrot.example.com — required for IngressRoute
+  # Traefik cookie-based sticky sessions. Enable to pin a browser to one pod
+  # so that per-pod stress tests (mem/disk) stay on the same replica.
+  sticky: true

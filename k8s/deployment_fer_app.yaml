@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fer-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fer-app
+  template:
+    metadata:
+      labels:
+        app: fer-app
+        fer-app-version: v1.2.0
+    spec:
+      containers:
+      - name: fer-app
+        image: ghcr.io/cyberbugjr/fer-app-test:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 100m
+          limits:
+            memory: 100Mi
+            cpu: 200m
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: LABELS_FILE
+          value: /etc/podinfo/labels
+        - name: VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['fer-app-version']
+        - name: MY_CPU_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              containerName: fer-app
+              divisor: "1m"
+              resource: requests.cpu
+        - name: MY_CPU_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: fer-app
+              divisor: "1m"
+              resource: limits.cpu
+        - name: MY_MEM_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              containerName: fer-app
+              divisor: "1M"
+              resource: requests.memory
+        - name: MY_MEM_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: fer-app
+              divisor: "1M"
+              resource: limits.memory
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: podinfo
+          mountPath: /etc/podinfo
+      volumes:
+        - name: podinfo
+          downwardAPI:
+            items:
+              - path: "labels"
+                fieldRef:
+                  fieldPath: metadata.labels
+        - name: nginx-config
+          configMap:
+            name: fer-app-nginx-config

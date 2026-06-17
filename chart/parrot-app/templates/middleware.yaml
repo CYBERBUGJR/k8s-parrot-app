@@ -1,0 +1,1 @@
+{{- /* Strip-prefix middleware removed: app is now always served at the root of its host. */ -}}
