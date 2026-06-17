@@ -1,0 +1,37 @@
+name: Chart Release
+
+on:
+  push:
+    tags:
+      - "chart/v*"
+
+jobs:
+  package-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#chart/v}" >> "$GITHUB_OUTPUT"
+
+      - name: Lint Helm chart
+        run: helm lint chart/parrot-app
+
+      - name: Package Helm chart
+        run: |
+          helm package chart/parrot-app --version ${{ steps.version.outputs.version }}
+          echo "CHART_PACKAGE=$(ls parrot-app-*.tgz)" >> "$GITHUB_ENV"
+
+      - name: Login to GHCR
+        run: |
+          helm registry login ghcr.io \
+            --username ${{ github.actor }} \
+            --password ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Helm chart to GHCR
+        run: helm push "$CHART_PACKAGE" oci://ghcr.io/cyberbugjr/charts
