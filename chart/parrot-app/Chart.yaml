@@ -1,6 +1,7 @@
 apiVersion: v2
 name: parrot-app
-description: PHP/Nginx test application for CMS DAQ
-version: 0.4.0
-appVersion: "2.0.0"
+description: Lightweight PHP dashboard running inside your cluster — visualise pod resources, RBAC permissions, events and stress-test limits from the pod's own perspective.
+version: 0.5.8
+appVersion: "2.3.5"
 type: application
+icon: https://raw.githubusercontent.com/CYBERBUGJR/k8s-parrot-app/main/screenshots/parrot-icon.png

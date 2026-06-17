@@ -166,7 +166,5 @@ function k8s_format_rules(array $review): array {
 function k8s_probe_list(): array {
     return [
         ['label' => 'nodes — list (cluster-wide)', 'resource' => 'nodes', 'group' => '', 'verb' => 'list', 'namespaced' => false],
-        ['label' => 'deployments — delete', 'resource' => 'deployments', 'group' => 'apps', 'verb' => 'delete', 'namespaced' => true],
-        ['label' => 'secrets — get', 'resource' => 'secrets', 'group' => '', 'verb' => 'get', 'namespaced' => true],
     ];
 }

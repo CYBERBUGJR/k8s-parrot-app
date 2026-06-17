@@ -10,12 +10,15 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: {{ if .Values.ingress.host }}Host(`{{ .Values.ingress.host }}`){{ else }}PathPrefix(`{{ .Values.ingress.path }}`){{ end }}
-      {{- if and (not .Values.ingress.host) .Values.ingress.path }}
-      middlewares:
-        - name: {{ .Release.Name }}-stripprefix
-      {{- end }}
+      match: Host(`{{ .Values.ingress.host }}`)
       services:
         - name: {{ .Release.Name }}
           port: {{ .Values.service.port }}
+          {{- if .Values.ingress.sticky }}
+          sticky:
+            cookie:
+              name: parrot_sticky
+              httpOnly: true
+              sameSite: lax
+          {{- end }}
 {{- end }}

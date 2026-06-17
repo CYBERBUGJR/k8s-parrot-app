@@ -71,6 +71,9 @@ h1, .tagline, .card-title { font-family: 'Space Grotesk', sans-serif; }
   color: var(--muted);
   font-weight: 700;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .card-head { display: flex; justify-content: space-between; align-items: center; }
 .card-source { font-size: 14px; color: var(--muted); }
@@ -96,6 +99,21 @@ h1, .tagline, .card-title { font-family: 'Space Grotesk', sans-serif; }
 .gauge-marker { position: absolute; top: -3px; width: 2px; height: 16px; background: #f9ab00; }
 .gauge-sub { font-size: 14px; color: var(--muted); margin-top: 6px; }
 
+/* Collapsible permissions section */
+details { border: none; }
+details summary { list-style: none; cursor: pointer; width: 100%; box-sizing: border-box; }
+details summary::-webkit-details-marker { display: none; }
+.permissions-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+.perm-chevron { margin-left: 8px; flex-shrink: 0; color: var(--muted); }
+.chevron-open { display: none; }
+details[open] .chevron-closed { display: none; }
+details[open] .chevron-open  { display: inline; }
+
 /* Permissions table */
 .perm-row {
   display: flex;
@@ -108,10 +126,81 @@ h1, .tagline, .card-title { font-family: 'Space Grotesk', sans-serif; }
 .perm-row:last-child { border-bottom: none; }
 .perm-row code { background: var(--pill-bg); border-radius: 4px; padding: 1px 6px; }
 
+/* Events log */
+#events { border-top: 1px solid #f0f2f6; padding-top: 4px; }
+#events .perm-row { font-size: 14px; gap: 8px; flex-wrap: nowrap; }
+#events code { font-size: 12px; white-space: nowrap; }
+
 /* Labels */
 .labels { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
 
 .note { color: var(--text-muted); font-style: italic; margin-top: 10px; }
+
+/* Tests — one card split into equal blocks, mirrors Resources layout */
+.tests {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.test {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f4f6fa;
+  border-radius: 8px;
+  padding: 14px;
+}
+.test-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+/* Push controls (status + buttons) to the bottom of every test block */
+.test .stress-controls {
+  margin-top: auto;
+  padding-top: 10px;
+}
+@media (max-width: 800px) {
+  .tests { flex-direction: column; }
+}
+
+.stress-warning {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #856404;
+}
+.stress-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.stress-controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.stress-controls button {
+  padding: 5px 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.stress-controls .btn-start { background: #3b82f6; color: #fff; }
+.stress-controls .btn-stop  { background: #ef4444; color: #fff; }
+.stress-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+.stress-buttons { display: flex; gap: 8px; flex-shrink: 0; }
+.stress-status { color: var(--text-muted); font-size: 13px; margin-top: 6px; font-style: italic; }
 
 @media (max-width: 800px) {
   .row { flex-direction: column; }

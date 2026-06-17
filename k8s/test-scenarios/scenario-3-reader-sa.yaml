@@ -17,8 +17,11 @@ metadata:
   name: parrot-reader
 rules:
   - apiGroups: [""]
-    resources: ["pods", "configmaps"]
+    resources: ["pods", "configmaps", "events"]
     verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -41,8 +44,8 @@ rules:
     resources: ["nodes", "nodes/proxy"]
     verbs: ["get", "list"]
   - apiGroups: ["metrics.k8s.io"]
-    resources: ["pods"]
-    verbs: ["get"]
+    resources: ["pods", "nodes"]
+    verbs: ["get", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -55,4 +58,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: parrot-reader
-    namespace: REPLACE_WITH_NAMESPACE
+    namespace: default
