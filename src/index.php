@@ -82,7 +82,7 @@ const ICON_CHEVRON_UP = '<path d="M14.5 13.25L12 10.75L9.5 13.25" stroke="curren
             <img src="assets/parrot.gif" alt="Party Parrot">
             <div>
                 <h1>Parrot App</h1>
-                <div class="tagline">El famoso loro loco, inspector de Kubernetes !</div>
+                <div class="tagline">The famous crazy parrot — Kubernetes inspector!</div>
             </div>
         </div>
         <div class="header-badges">

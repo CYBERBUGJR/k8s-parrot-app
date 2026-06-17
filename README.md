@@ -4,7 +4,7 @@
   <img src="src/assets/parrot.gif" height="80">
 </p>
 
-<p align="center"><strong>El famoso loro loco, inspector de Kubernetes!</strong></p>
+<p align="center"><strong>The famous crazy parrot — Kubernetes inspector!</strong></p>
 
 <p align="center">
 A lightweight PHP dashboard that runs <strong>inside</strong> your cluster and shows what your pod can actually see: resources, permissions, node info, live metrics, and events. Drop it in, assign a ServiceAccount, and instantly visualise the cluster from the pod's own perspective.
