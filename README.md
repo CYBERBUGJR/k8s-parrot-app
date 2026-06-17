@@ -15,7 +15,8 @@ Built as a hands-on teaching tool for Kubernetes concepts: RBAC, resource limits
 **TL;DR** — install with Helm and set your hostname:
 
 ```bash
-helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/k8s-parrot-app \
+helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/charts/parrot-app \
+  --version 0.5.8 \
   --namespace default \
   --set ingress.host=parrot.example.com
 ```
@@ -56,7 +57,8 @@ helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/k8s-parrot-app \
 ### Helm (recommended)
 
 ```bash
-helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/k8s-parrot-app \
+helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/charts/parrot-app \
+  --version 0.5.8 \
   --namespace default \
   --set ingress.host=parrot.example.com
 ```

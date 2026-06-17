@@ -2,10 +2,10 @@ replicaCount: 3
 
 image:
   repository: ghcr.io/cyberbugjr/k8s-parrot-app
-  tag: v2.3.5
+  tag: 2.3.5
   pullPolicy: Always
 
-appVersion: v2.3.5
+appVersion: 2.3.5
 
 # ServiceAccount assigned to the pod. Empty means the namespace default SA;
 # the app then hides the permissions section. RBAC for this SA is NOT part
