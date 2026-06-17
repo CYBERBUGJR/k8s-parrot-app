@@ -12,6 +12,14 @@ A lightweight PHP dashboard that runs <strong>inside</strong> your cluster and s
 Built as a hands-on teaching tool for Kubernetes concepts: RBAC, resource limits, HPA, OOMKiller, ephemeral storage eviction. No heavy frameworks. No external dependencies.
 </p>
 
+**TL;DR** — install with Helm and set your hostname:
+
+```bash
+helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/k8s-parrot-app \
+  --namespace default \
+  --set ingress.host=parrot.example.com
+```
+
 ---
 
 ## What it shows
@@ -44,14 +52,6 @@ Built as a hands-on teaching tool for Kubernetes concepts: RBAC, resource limits
 ---
 
 ## Quick start
-
-**TL;DR** — install with Helm and set your hostname:
-
-```bash
-helm upgrade --install parrot-app oci://ghcr.io/cyberbugjr/k8s-parrot-app \
-  --namespace default \
-  --set ingress.host=parrot.example.com
-```
 
 ### Helm (recommended)
 
