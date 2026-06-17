@@ -1,7 +1,7 @@
 replicaCount: 3
 
 image:
-  repository: harbor.cms/rancher_images/parrot-app
+  repository: ghcr.io/cyberbugjr/k8s-parrot-app
   tag: v2.3.5
   pullPolicy: Always
 
